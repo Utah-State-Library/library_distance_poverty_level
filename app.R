@@ -119,7 +119,7 @@ ui <- page_sidebar(
       highchartOutput("hc_scatter", height = 500)
     ),
     card(
-      tags$span(style = "font-weight:bold;", , "Methodology"),
+      tags$span(style = "font-weight:bold;", "Methodology"),
       tags$p(
         "This dashboard shows distance from brick-and-mortar, state certified library locations from municipality centers. Please note that municipalities on the border of other states may have a library that is closer than the identified Utah library (e.g., Wendover). Additionally, distances are calculated as the bird flies, and some city-library pairings might not make perfect sense (e.g., Alta to Park City Library)."
       ),

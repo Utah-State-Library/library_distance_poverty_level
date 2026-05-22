@@ -34,13 +34,12 @@ bookmobile_counties <- c(
 ##### UI #####
 
 ui <- page_sidebar(
-  title = "Distance to the Nearest Library",
+  title = "Utah Poverty Levels and Distance to the Nearest Library",
   fillable = FALSE,
 
   tags$head(
     tags$style(HTML(
       "
-
     /* Default state */
     .leaflet-marker-icon {
       opacity: 0.25 !important;
@@ -53,7 +52,6 @@ ui <- page_sidebar(
       transform: scale(1.4);
       z-index: 1000 !important;
     }
-
     "
     ))
   ),
@@ -119,6 +117,22 @@ ui <- page_sidebar(
     card(
       full_screen = TRUE,
       highchartOutput("hc_scatter", height = 500)
+    ),
+    card(
+      tags$span(style = "font-weight:bold;", , "Methodology"),
+      tags$p(
+        "This dashboard shows distance from brick-and-mortar, state certified library locations from municipality centers. Please note that municipalities on the border of other states may have a library that is closer than the identified Utah library (e.g., Wendover). Additionally, distances are calculated as the bird flies, and some city-library pairings might not make perfect sense (e.g., Alta to Park City Library)."
+      ),
+      tags$p(
+        tags$span(
+          "Poverty Level data comes from the most recently available American Community Survey (ACS, 2024) published by the Census Bureau."
+        )
+      ),
+      tags$p(
+        tags$span(
+          "Geographic data comes from the Utah State Geographic Information Dataservice. Using municipalities' geography, the center of the city was identified using the spatial analysis package sf."
+        )
+      )
     )
   )
 )
@@ -438,11 +452,11 @@ server <- function(input, output, session) {
         pointFormat = paste0(
           "<b>{point.NAME}</b><br>",
           "Percent Below Poverty: ",
-          "{point.x:.2f}%",
+          "{point.x:.2f}%<br>",
           "Nearest Library: ",
           "{point.nearest_lib}<br>",
           "Distance: ",
-          "{point.y:.2f} Miles<br>"
+          "{point.y:.2f} Miles"
         )
       )
   })

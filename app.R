@@ -323,15 +323,24 @@ server <- function(input, output, session) {
 
     ##### Color Palette #####
 
-    pal <- colorFactor(
-      palette = c(
-        "#d7d7d7",
-        "#f8fe50",
-        "#ffc507",
-        "#ff0000"
-      ),
+    # pal <- colorFactor(
+    #   palette = c(
+    #     #"#1e39d6",
+    #     "#2ce961",
+    #     "#f8fe50",
+    #     "#ffc507",
+    #     "#ff0000"
+    #   ),
 
-      domain = centroid_sf$Percent.below.poverty.level
+    #   domain = centroid_sf$Percent.below.poverty.level
+    # )
+
+    pal <- colorBin(
+      "RdYlBu",
+      domain = 0:50,
+      #centroid_sf$Percent.below.poverty.level,
+      bins = 10,
+      reverse = TRUE
     )
 
     ##### Leaflet #####
@@ -394,7 +403,7 @@ server <- function(input, output, session) {
 
         radius = 4,
 
-        color = "#413ac8",
+        color = "#000000",
 
         stroke = TRUE,
         weight = 1,
@@ -410,6 +419,13 @@ server <- function(input, output, session) {
         data = nearest_lines,
         weight = 1,
         opacity = 0.5
+      ) %>%
+      addLegend(
+        "topright",
+        pal = pal,
+        values = ~Percent.below.poverty.level,
+        title = "Poverty Levels",
+        opacity = 1
       )
   })
 
@@ -431,7 +447,7 @@ server <- function(input, output, session) {
     ) %>%
 
       hc_title(
-        text = "Poverty vs Distance to Nearest Library"
+        text = "Percent of Population Below Poverty Level vs Distance to Nearest Library"
       ) %>%
 
       hc_xAxis(

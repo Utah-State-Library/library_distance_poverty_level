@@ -1,3 +1,5 @@
+# Load necessary packages - IF THERE ARE ANY CHANGES, run:
+# rsconnect::writeManifest()
 library(tidyverse)
 library(magrittr)
 library(sf)

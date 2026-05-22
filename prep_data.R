@@ -1,23 +1,38 @@
-#### Prep Data
+# #### Prep Data
 
-#### Data
-cnty <- read_sf(
-  "C:/Users/samdutton/Desktop/Local Shiny Apps/Library-Map/data/counties/Counties.shp"
-) %>%
-  as.data.frame() %>%
-  select(COUNTYNBR, county_name = NAME) %>%
-  mutate(county_name = str_to_title(county_name))
+# #### Data
+# cnty <- read_sf(
+#   "C:/Users/samdutton/Desktop/Local Shiny Apps/Library-Map/data/counties/Counties.shp"
+# ) %>%
+#   as.data.frame() %>%
+#   select(COUNTYNBR, county_name = NAME) %>%
+#   mutate(county_name = str_to_title(county_name))
 
-poverty_df1 <- read.csv(
-  "C:/Users/samdutton/Downloads/ACSST5Y2024.S1701-2026-05-12T191644.csv"
-) %>%
-  head(1)
-outlets <- readRDS(
-  "C:/Users/samdutton/Desktop/Local Shiny Apps/Library-Map/data/processed/outlet_ut_app.RDS"
-)
-municipalities <- sf::read_sf(
-  "C:/Users/samdutton/Desktop/Local Shiny Apps/Library-Map/data/municipalities/Municipalities.shp"
-)
+# saveRDS(cnty, "data/counties.RDS")
+
+# poverty_df1 <- read.csv(
+#   "C:/Users/samdutton/Downloads/ACSST5Y2024.S1701-2026-05-12T191644.csv"
+# ) %>%
+#   head(1)
+
+# saveRDS(poverty_df1, "data/poverty_data.RDS")
+
+# outlets <- readRDS(
+#   "C:/Users/samdutton/Desktop/Local Shiny Apps/Library-Map/data/processed/outlet_ut_app.RDS"
+# )
+
+# saveRDS(outlets, "data/outlets.RDS")
+
+# municipalities <- sf::read_sf(
+#   "C:/Users/samdutton/Desktop/Local Shiny Apps/Library-Map/data/municipalities/Municipalities.shp"
+# )
+
+# write_sf(municipalities, "data/municipalities.shp")
+
+cnty <- readRDS("data/counties.RDS")
+poverty_df1 <- readRDS("data/poverty_data.RDS")
+outlets <- readRDS("data/outlets.RDS")
+municipalities <- read_sf("data/municipalities.shp")
 
 #### Tidy Poverty DF
 

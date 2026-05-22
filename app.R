@@ -121,7 +121,7 @@ ui <- page_sidebar(
     card(
       tags$span(style = "font-weight:bold;", "Methodology"),
       tags$p(
-        "This dashboard shows distance from brick-and-mortar, state certified library locations from municipality centers. Please note that municipalities on the border of other states may have a library that is closer than the identified Utah library (e.g., Wendover). Additionally, distances are calculated as the bird flies, and some city-library pairings might not make perfect sense (e.g., Alta to Park City Library)."
+        "This dashboard shows distance to brick-and-mortar, state certified library locations from municipality centers. Please note that municipalities on the border of other states may have a library that is closer than the identified Utah library (e.g., Wendover). Additionally, distances are calculated as the bird flies, and some city-library pairings might not make perfect sense (e.g., Alta to Park City Library)."
       ),
       tags$p(
         tags$span(
@@ -424,7 +424,8 @@ server <- function(input, output, session) {
         "topright",
         pal = pal,
         values = ~Percent.below.poverty.level,
-        title = "Poverty Levels",
+        title = "% Below<br>Poverty Level",
+        labFormat = labelFormat(suffix = "%"),
         opacity = 1
       )
   })
